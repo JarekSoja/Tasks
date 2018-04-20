@@ -1,11 +1,12 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.Repository.TaskRepository;
+import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DbService {
@@ -17,7 +18,15 @@ public class DbService {
         return repository.findAll();
     }
 
-    public Task getTask(long taskId) {
+    public Task saveTask(final Task task) {
+        return repository.save(task);
+    }
+
+    public Optional<Task> getTask(final long taskId) {
         return repository.findByIdEquals(taskId);
+    }
+
+    public void deleteTask (final long taskId) {
+        repository.delete(getTask(taskId).get());
     }
 }
