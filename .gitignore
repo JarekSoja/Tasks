@@ -101,3 +101,4 @@ test/resources/
 /src/main/resources/
 !/settings.gradle
 settings.gradle
+!/.gradle/
