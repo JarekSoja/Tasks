@@ -94,3 +94,4 @@ hs_err_pid*
 /out/
 /tasks.iml
 /settings.gradle
+!/main/resources/application.properties
