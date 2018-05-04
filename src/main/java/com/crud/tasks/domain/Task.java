@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
+@Component
 @NoArgsConstructor
 @Entity(name = "tasks")
 public class Task {
