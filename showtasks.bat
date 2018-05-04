@@ -12,7 +12,7 @@ echo failed starting Chrome - breaking work
 goto fail
 
 :showtasks
-start http://localhost:8080/crud/v1/task/getTasks
+start http://localhost:8080/crud/v1/task/getTasksheroku login
 if %ERRORLEVEL% == 0 goto end
 echo.
 echo failed loading tasks - breaking work
