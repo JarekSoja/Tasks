@@ -99,3 +99,5 @@ main/resources/templates/
 test/resources/
 /src/test/resources/
 /src/main/resources/
+!/settings.gradle
+settings.gradle
