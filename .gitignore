@@ -105,3 +105,6 @@ settings.gradle
 !/gradle/wrapper/gradle-wrapper.jar
 !/src/main/resources/application.properties
 .gitignore
+!/src/main/resources/
+src/main/resources/
+resources/
