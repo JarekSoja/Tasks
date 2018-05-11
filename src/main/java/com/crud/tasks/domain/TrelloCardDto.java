@@ -3,9 +3,10 @@ package com.crud.tasks.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class TrelloCardDto {
 
@@ -13,10 +14,10 @@ public class TrelloCardDto {
     private String pos;
     private String description;
     private String listId;
-    private Badges badges;
-    private int votes;
-    private AttachmentsByType attachmentsByType;
-    private Trello trello;
-    private int board;
-    private int card;
+//    private Badges badges = new Badges();
+//    private int votes = 2;
+//    private AttachmentsByType attachmentsByType = new AttachmentsByType();
+//    private Trello trello = new Trello();
+//    private int board = 0;
+//    private int card = 0;
 }
