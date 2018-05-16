@@ -1,4 +1,4 @@
-gradlew build
+call gradlew build
 if %ERRORLEVEL% == 0 goto rename
 echo.
 echo gradlew build has errors - breaking work
