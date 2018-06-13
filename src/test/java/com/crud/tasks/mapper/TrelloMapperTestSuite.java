@@ -36,9 +36,11 @@ public class TrelloMapperTestSuite {
         List<TrelloBoard> testResult = trelloMapper.mapToBoards(testList);
         int numberOfBoards = testResult.size();
         String nameOfTestedList = testResult.get(1).getName();
+        String idOfTestedBoard = testResult.get(0).getId();
         //Then
         Assert.assertEquals(2, numberOfBoards);
         Assert.assertEquals("2", nameOfTestedList);
+        Assert.assertEquals("test DtoBoard", idOfTestedBoard);
     }
 
 
@@ -61,9 +63,11 @@ public class TrelloMapperTestSuite {
         System.out.println(testResult.size());
         int numberOfBoards = trelloMapper.mapToBoardsDto(testList).size();
         String nameOfTestedList = testResult.get(1).getName();
+        String idOfTestedBoard = testResult.get(0).getId();
         //Then
         Assert.assertEquals(2, numberOfBoards);
         Assert.assertEquals("2", nameOfTestedList);
+        Assert.assertEquals("test DtoBoard", idOfTestedBoard);
     }
 
     @Test
@@ -77,8 +81,14 @@ public class TrelloMapperTestSuite {
         listsDto2.add(listDto2);
         //When
         List<TrelloList> testList1 = trelloMapper.mapToList(listsDto1);
+        List<TrelloList> testList2 = trelloMapper.mapToList(listsDto2);
+        String testField1 = testList1.get(0).getName();
+        boolean testField2 = testList2.get(0).isClosed();
         //Then
+        Assert.assertEquals(testField1,"test3");
         Assert.assertEquals(1, testList1.size());
+        Assert.assertEquals(true, testField2);
+
     }
 
     @Test
@@ -93,10 +103,12 @@ public class TrelloMapperTestSuite {
         //When
         List<TrelloListDto> testList1 = trelloMapper.mapToListDto(lists1);
         List<TrelloListDto> testList2 = trelloMapper.mapToListDto(lists2);
-        String testName = testList2.get(0).getName();
+        String testField1 = testList1.get(0).getName();
+        boolean testField2 = testList2.get(0).isClosed();
         //Then
+        Assert.assertEquals(testField1,"test3");
         Assert.assertEquals(1, testList1.size());
-        Assert.assertEquals("test4", testName);
+        Assert.assertEquals(true, testField2);
     }
 
     @Test
