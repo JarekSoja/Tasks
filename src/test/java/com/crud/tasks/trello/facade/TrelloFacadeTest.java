@@ -37,7 +37,7 @@ public class TrelloFacadeTest {
     private TrelloMapper trelloMapper;
 
     @Test
-    public void shouldFetchEmptyList() {
+    public void shouldFetchTrelloBoards(){
         //Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
         trelloLists.add(new TrelloListDto("1", "test_list1", false));
@@ -76,7 +76,7 @@ public class TrelloFacadeTest {
     }
 
     @Test
-    public void shouldFetchTrelloBoards() {
+    public void  shouldFetchEmptyList()  {
         //Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
         trelloLists.add(new TrelloListDto("1", "test_list", false));
@@ -94,5 +94,12 @@ public class TrelloFacadeTest {
         when(trelloMapper.mapToBoards(trelloBoards)).thenReturn(mappedTrelloBoards);
         when(trelloMapper.mapToBoardsDto(anyList())).thenReturn(new ArrayList<>());
         when(trelloValidator.validateTrelloBoards(mappedTrelloBoards)).thenReturn(new ArrayList<>());
+
+        //When
+        List<TrelloBoardDto> trelloBoardDtos = trelloFacade.fetchTrelloBoards();
+
+        //Then
+        Assert.assertNotNull(trelloBoardDtos);
+        Assert.assertEquals(0, trelloBoardDtos.size());
     }
 }

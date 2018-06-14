@@ -54,6 +54,7 @@ public class TaskControllerTestSuite {
         //When&&Then
         mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
+                .andExpect(jsonPath("$.[0].title", is("2")))
                 .andExpect(jsonPath("$", hasSize(1)));
     }
 
