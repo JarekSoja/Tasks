@@ -133,7 +133,7 @@ public class TrelloMapperTestSuite {
         String testName = cardDto.getName();
         String testDesc = cardDto.getDescription();
         //Then
-        Assert.assertEquals("test1", testName);
+        Assert.assertEquals("test66", testName);
         Assert.assertEquals("teeest", testDesc);
     }
 
