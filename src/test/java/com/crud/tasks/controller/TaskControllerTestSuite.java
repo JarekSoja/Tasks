@@ -17,9 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -31,9 +34,6 @@ public class TaskControllerTestSuite {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @InjectMocks
-    private TaskController taskController;
 
     @MockBean
     private DbService dbService;
@@ -59,12 +59,14 @@ public class TaskControllerTestSuite {
     @Test
     public void testShouldGetTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Task task = new Task(1L, "Title after", "Content after");
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        TaskDto taskDto = new TaskDto(555L, "Title", "Content");
+        Optional<Task> task = Optional.of(new Task(555L, "Title after", "Content after"));
+        when(dbService.getTask(anyLong())).thenReturn(task);
+        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
         //When&&Then
-        mockMvc.perform(get("/v1/task/getTask/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(200))
+        mockMvc.perform(get("/v1/task/getTask/333")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title", is("Title after")));
     }
 
