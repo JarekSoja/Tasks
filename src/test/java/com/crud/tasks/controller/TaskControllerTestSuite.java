@@ -66,7 +66,7 @@ public class TaskControllerTestSuite {
         mockMvc.perform(get("/v1/task/getTask/333")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title", is("Title after")));
+                .andExpect(jsonPath("$.title", is("Title")));
     }
 
     @Test
@@ -74,41 +74,53 @@ public class TaskControllerTestSuite {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
         Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
-        when(dbService.getTask(any(Long.class))).thenReturn(task);
+        Task task2 = new Task(1L, "Title after", "Content after");
         when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
+        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task2);
         //When&&Then
-        mockMvc.perform(get("/v1/task/getTask/1"))
-                .andExpect(status().is(200));
-        mockMvc.perform(delete("/v1/task/deleteTask/1"));
-        mockMvc.perform(get("/v1/task/getTask/1"))
-                .andExpect(status().is(404));
+        mockMvc.perform(delete("/v1/task/deleteTask/22")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test
     public void testShouldUpdateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
-        when(dbService.getTask(any(Long.class))).thenReturn(task);
-        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
+        Task task = new Task(1L, "Title after", "Content after");
+
+        when(dbService.saveTask(task)).thenReturn(task);
+        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task);
         //When&&Then
-        mockMvc.perform(put("/v1/task/updateTask/1"))
-                .andExpect(status().is(200));
+
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(taskDto);
+        mockMvc.perform(put("/v1/task/updateTask/444")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.title", is("Title")))
+                .andExpect(jsonPath("$.content", is("Content")));
     }
+
 
     @Test
     public void testShouldCreateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
+        Task task = new Task(1L, "Title after", "Content after");
 
-        when(dbService.getTask(any(Long.class))).thenReturn(task);
-        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
-
-        Gson gson = new Gson();
-        String jsonContent = gson.toJson(taskDto);
+        when(dbService.saveTask(task)).thenReturn(task);
+        //when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+        //when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task);
 
         //When&&Then
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(taskDto);
         System.out.println(jsonContent);
         mockMvc.perform(post("/v1/task/createTask")
                 .contentType(MediaType.APPLICATION_JSON)
