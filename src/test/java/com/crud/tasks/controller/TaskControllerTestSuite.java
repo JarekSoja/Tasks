@@ -1,13 +1,13 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.domain.Task;
+import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -47,7 +47,7 @@ public class TaskControllerTestSuite {
         //Given
         List<Task> controlTasks = new ArrayList<>();
         List<TaskDto> tasks = new ArrayList<>();
-        tasks.add(new TaskDto(1L,"2", "333"));
+        tasks.add(new TaskDto(1L, "2", "333"));
         when(taskMapper.mapToTaskDtoList(controlTasks)).thenReturn(tasks);
         //When&&Then
         mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
@@ -74,8 +74,9 @@ public class TaskControllerTestSuite {
     public void testShouldDeleteTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Task task = new Task(1L, "Title after", "Content after");
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
+        when(dbService.getTask(any(Long.class))).thenReturn(task);
+        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
         //When&&Then
         mockMvc.perform(get("/v1/task/getTask/1"))
                 .andExpect(status().is(200));
@@ -88,8 +89,9 @@ public class TaskControllerTestSuite {
     public void testShouldUpdateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Task task = new Task(1L, "Title after", "Content after");
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
+        when(dbService.getTask(any(Long.class))).thenReturn(task);
+        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
         //When&&Then
         mockMvc.perform(put("/v1/task/updateTask/1"))
                 .andExpect(status().is(200));
@@ -99,16 +101,21 @@ public class TaskControllerTestSuite {
     public void testShouldCreateTask() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-        Task task = new Task(1L, "Title after", "Content after");
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
+
+        when(dbService.getTask(any(Long.class))).thenReturn(task);
+        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
+
         Gson gson = new Gson();
-        String jsonContent = gson.toJson(task);
+        String jsonContent = gson.toJson(taskDto);
+
         //When&&Then
+        System.out.println(jsonContent);
         mockMvc.perform(post("/v1/task/createTask")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
+                .andExpect(status().isOk())
                 .andExpect((jsonPath("$.title", is("Title after"))));
-
     }
 }
