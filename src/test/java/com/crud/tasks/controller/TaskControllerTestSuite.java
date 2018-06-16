@@ -115,8 +115,8 @@ public class TaskControllerTestSuite {
         Task task = new Task(1L, "Title after", "Content after");
 
         when(dbService.saveTask(task)).thenReturn(task);
-        //when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-        //when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task);
+        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+        when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task);
 
         //When&&Then
         Gson gson = new Gson();
