@@ -31,8 +31,7 @@ public class DbService {
         return repository.findByIdEquals(taskId);
     }
 
-    public void deleteTask (final TaskDto taskDto) {
-        Task task = taskMapper.mapToTask(taskDto);
-        repository.delete(task);
+    public void deleteTask (final Long id) {
+        repository.delete(id);
     }
 }
