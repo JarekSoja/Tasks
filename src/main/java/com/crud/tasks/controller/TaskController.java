@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @DeleteMapping(value = "/deleteTask/{id}")
-    public @ResponseBody void deleteTask(@PathVariable Long id) throws TaskNotFoundException {
+    public void deleteTask(@PathVariable Long id) {
         dbService.deleteTask(id);
     }
 
