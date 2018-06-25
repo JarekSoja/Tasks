@@ -1,5 +1,7 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class DbService {
     @Autowired
     private TaskRepository repository;
 
+    @Autowired
+    private TaskMapper taskMapper;
+
     public List<Task> getAllTasks() {
         return repository.findAll();
     }
@@ -26,7 +31,8 @@ public class DbService {
         return repository.findByIdEquals(taskId);
     }
 
-    public void deleteTask (final long taskId) {
-        repository.deleteByIdEquals(taskId);
+    public void deleteTask (final TaskDto taskDto) {
+        Task task = taskMapper.mapToTask(taskDto);
+        repository.delete(task);
     }
 }
