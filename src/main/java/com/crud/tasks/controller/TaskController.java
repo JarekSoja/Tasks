@@ -11,12 +11,7 @@ import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@CrossOrigin(origins = "*", methods = {
-        RequestMethod.POST,
-        RequestMethod.DELETE,
-        RequestMethod.GET,
-        RequestMethod.PUT
-})
+@CrossOrigin(origins = "*")
 
 @RestController
 @RequestMapping("/v1/task")
@@ -32,6 +27,8 @@ public class TaskController {
     }
 
 
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/getTasks")
     public List<TaskDto> getTasks() {
         return taskMapper.mapToTaskDtoList(dbService.getAllTasks());
@@ -42,8 +39,8 @@ public class TaskController {
         return taskMapper.mapToTaskDto(dbService.getTask(id).orElseThrow(TaskNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteTask/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    @DeleteMapping(value = "/deleteTask/{id}")
+    public @ResponseBody void deleteTask(@PathVariable Long id) {
         dbService.deleteTask(id);
     }
 
