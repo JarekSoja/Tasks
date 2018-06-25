@@ -47,8 +47,8 @@ public class TaskController {
         dbService.deleteTask(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateTask/{id}")
-    public TaskDto updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateTask")
+    public TaskDto updateTask(@RequestBody TaskDto taskDto) {
         return taskMapper.mapToTaskDto(dbService.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
