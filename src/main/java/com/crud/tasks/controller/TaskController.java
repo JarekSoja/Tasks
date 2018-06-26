@@ -6,6 +6,7 @@ import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.DeleteOperation;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public class TaskController {
         return taskMapper.mapToTaskDto(dbService.getTask(id).orElseThrow(TaskNotFoundException::new));
     }
 
-    @DeleteOperation
     @DeleteMapping(value = "/deleteTask/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
     public void deleteTask(@PathVariable Long id) {
         dbService.deleteTask(id);
     }
