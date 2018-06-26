@@ -26,9 +26,6 @@ public class TaskController {
         this.taskMapper = taskMapper;
     }
 
-
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/getTasks")
     public List<TaskDto> getTasks() {
         return taskMapper.mapToTaskDtoList(dbService.getAllTasks());

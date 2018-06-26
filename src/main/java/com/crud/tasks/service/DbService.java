@@ -1,6 +1,5 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.domain.Task;
@@ -32,6 +31,6 @@ public class DbService {
     }
 
     public void deleteTask (final Long id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

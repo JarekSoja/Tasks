@@ -36,7 +36,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-mail:1.5.10.RELEASE')
     compile('org.springframework.boot:spring-boot-starter-actuator')
 
-    compile('mysql:mysql-connector-java')
+    //compile('mysql:mysql-connector-java')
     compile('org.postgresql:postgresql')
 
     compile('io.springfox:springfox-swagger2:2.8.0')
@@ -46,4 +46,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.6'
+
 }
