@@ -21,6 +21,9 @@ public class TrelloBoardDto {
         this.lists = lists;
     }
 
+    public TrelloBoardDto() {
+    }
+
     public String getName() {
         return name;
     }

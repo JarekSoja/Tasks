@@ -19,6 +19,9 @@ public class CreatedTrelloCardDto {
         this.shortUrl = shortUrl;
     }
 
+    public CreatedTrelloCardDto(){
+    }
+
     public String getId() {
         return id;
     }

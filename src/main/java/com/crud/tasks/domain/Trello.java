@@ -15,6 +15,9 @@ public class Trello {
         this.card = card;
     }
 
+    public Trello() {
+    }
+
     public int getBoard() {
         return board;
     }

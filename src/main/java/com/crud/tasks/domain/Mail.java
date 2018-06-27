@@ -20,6 +20,9 @@ public class Mail {
         this.toCC = toCC;
     }
 
+    public Mail(){
+    }
+
     public String getMailTo() {
         return this.mailTo;
     }

@@ -15,6 +15,9 @@ public class Badges {
         this.attachmentsByType = attachmentsByType;
     }
 
+    public Badges(){
+    }
+
     public int getVotes() {
         return votes;
     }

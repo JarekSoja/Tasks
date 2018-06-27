@@ -14,6 +14,9 @@ public class TrelloBoard {
         this.lists = lists;
     }
 
+    public TrelloBoard() {
+    }
+
     public String getId() {
         return id;
     }
