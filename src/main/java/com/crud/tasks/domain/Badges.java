@@ -1,13 +1,7 @@
 package com.crud.tasks.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class Badges {
 
     @JsonProperty("votes")
@@ -16,6 +10,16 @@ public class Badges {
     @JsonProperty("attachmentsByType")
     private AttachmentsByType attachmentsByType;
 
+    public Badges(int votes, AttachmentsByType attachmentsByType) {
+        this.votes = votes;
+        this.attachmentsByType = attachmentsByType;
+    }
 
+    public int getVotes() {
+        return votes;
+    }
 
+    public AttachmentsByType getAttachmentsByType() {
+        return attachmentsByType;
+    }
 }

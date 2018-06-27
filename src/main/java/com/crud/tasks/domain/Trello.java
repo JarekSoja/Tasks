@@ -1,13 +1,7 @@
 package com.crud.tasks.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class Trello {
 
     @JsonProperty("board")
@@ -15,4 +9,17 @@ public class Trello {
 
     @JsonProperty("card")
     private int card;
+
+    public Trello(int board, int card) {
+        this.board = board;
+        this.card = card;
+    }
+
+    public int getBoard() {
+        return board;
+    }
+
+    public int getCard() {
+        return card;
+    }
 }

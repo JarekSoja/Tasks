@@ -1,13 +1,5 @@
 package com.crud.tasks.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
 public class TrelloCardDto {
 
     private String name;
@@ -15,4 +7,30 @@ public class TrelloCardDto {
     private String description;
     private String listId;
 
+    public TrelloCardDto(String name, String pos, String description, String listId) {
+        this.name = name;
+        this.pos = pos;
+        this.description = description;
+        this.listId = listId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPos() {
+        return pos;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getListId() {
+        return listId;
+    }
 }

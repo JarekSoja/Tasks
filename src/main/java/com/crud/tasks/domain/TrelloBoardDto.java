@@ -1,15 +1,9 @@
 package com.crud.tasks.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class TrelloBoardDto {
 
     @JsonProperty("name")
@@ -21,4 +15,21 @@ public class TrelloBoardDto {
     @JsonProperty("lists")
     private List<TrelloListDto> lists;
 
+    public TrelloBoardDto(String name, String id, List<TrelloListDto> lists) {
+        this.name = name;
+        this.id = id;
+        this.lists = lists;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<TrelloListDto> getLists() {
+        return lists;
+    }
 }
