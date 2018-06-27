@@ -2,8 +2,10 @@ package com.crud.tasks.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class Mail {
 
@@ -16,5 +18,21 @@ public class Mail {
         this.mailTo = mailTo;
         this.subject = subject;
         this.message = message;
+    }
+
+    public String getMailTo() {
+        return this.mailTo;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getToCC() {
+        return toCC;
     }
 }
