@@ -21,6 +21,9 @@ public class TaskDto {
         this.content = content;
     }
 
+    public TaskDto() {
+    }
+
     public Long getId() {
         return id;
     }
