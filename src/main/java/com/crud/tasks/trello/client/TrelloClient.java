@@ -50,9 +50,8 @@ public class TrelloClient {
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
-
+        System.out.println(url);
         return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
-
     }
 
     private URI getURL() {
@@ -62,6 +61,4 @@ public class TrelloClient {
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all").build().encode().toUri();
     }
-
-
 }
