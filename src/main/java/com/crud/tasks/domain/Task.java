@@ -1,7 +1,5 @@
 package com.crud.tasks.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 
