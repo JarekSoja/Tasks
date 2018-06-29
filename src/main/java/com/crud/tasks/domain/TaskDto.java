@@ -15,13 +15,15 @@ public class TaskDto {
     @JsonProperty("content")
     private String content;
 
-    public TaskDto(String title, String content) {
+    public TaskDto(Long id, String title, String content) {
+        this.id = id;
         this.title = title;
         this.content = content;
     }
 
     public TaskDto() {
     }
+
 
     public Long getId() {
         return id;

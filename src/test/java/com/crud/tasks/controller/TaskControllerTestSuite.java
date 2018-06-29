@@ -46,7 +46,7 @@ public class TaskControllerTestSuite {
         //Given
         List<Task> controlTasks = new ArrayList<>();
         List<TaskDto> tasks = new ArrayList<>();
-        tasks.add(new TaskDto("2", "333"));
+        tasks.add(new TaskDto(1L, "2", "333"));
         when(taskMapper.mapToTaskDtoList(controlTasks)).thenReturn(tasks);
         //When&&Then
         mockMvc.perform(get("/v1/tasks").contentType(MediaType.APPLICATION_JSON))
@@ -58,8 +58,8 @@ public class TaskControllerTestSuite {
     @Test
     public void testShouldGetTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("Title", "Content");
-        Optional<Task> task = Optional.of(new Task("Title after", "Content after"));
+        TaskDto taskDto = new TaskDto(1L,"Title", "Content");
+        Optional<Task> task = Optional.of(new Task(1L,"Title after", "Content after"));
         when(dbService.getTask(anyLong())).thenReturn(task);
         when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
         //When&&Then
@@ -72,9 +72,9 @@ public class TaskControllerTestSuite {
     @Test
     public void testShouldDeleteTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("Title", "Content");
-        Optional<Task> task = Optional.of(new Task("Title after", "Content after"));
-        Task task2 = new Task("Title after", "Content after");
+        TaskDto taskDto = new TaskDto(1L,"Title", "Content");
+        Optional<Task> task = Optional.of(new Task(1L, "Title after", "Content after"));
+        Task task2 = new Task(1L, "Title after", "Content after");
         when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
         when(taskMapper.mapToTask(any(TaskDto.class))).thenReturn(task2);
         //When&&Then
@@ -87,8 +87,8 @@ public class TaskControllerTestSuite {
     @Test
     public void testShouldUpdateTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("Title", "Content");
-        Task task = new Task("Title after", "Content after");
+        TaskDto taskDto = new TaskDto(1L, "Title", "Content");
+        Task task = new Task(1L, "Title after", "Content after");
 
         when(dbService.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
@@ -110,8 +110,8 @@ public class TaskControllerTestSuite {
     @Test
     public void testShouldCreateTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("Title", "Content");
-        Task task = new Task("Title after", "Content after");
+        TaskDto taskDto = new TaskDto(1L, "Title", "Content");
+        Task task = new Task(1L, "Title after", "Content after");
 
         when(dbService.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);

@@ -22,7 +22,7 @@ public class TaskMapperTestSuite {
     @Test
     public void testMapToTask(){
         //Given
-        TaskDto taskDto = new TaskDto("desc1", "testing mapper1");
+        TaskDto taskDto = new TaskDto(1L, "desc1", "testing mapper1");
         //When
         Task task = taskMapper.mapToTask(taskDto);
         //Then
@@ -33,7 +33,7 @@ public class TaskMapperTestSuite {
     @Test
     public void testMapToTaskDto() {
         //Given
-        Task task = new Task("desc1", "testing mapper1");
+        Task task = new Task(1L, "desc1", "testing mapper1");
         //When
         TaskDto taskDto = taskMapper.mapToTaskDto(task);
         //Then
@@ -44,9 +44,9 @@ public class TaskMapperTestSuite {
     @Test
     public void testMapToTaskDtoList() {
         //Given
-        Task task1 = new Task("desc1", "testing mapper1");
-        Task task2 = new Task("desc2", "testing mapper2");
-        Task task3 = new Task("desc3", "testing mapper3");
+        Task task1 = new Task(1L, "desc1", "testing mapper1");
+        Task task2 = new Task(2L, "desc2", "testing mapper2");
+        Task task3 = new Task(3L, "desc3", "testing mapper3");
         List <Task> taskList = new ArrayList<>();
         taskList.add(task1);
         taskList.add(task2);

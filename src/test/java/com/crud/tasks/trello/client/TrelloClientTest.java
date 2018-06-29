@@ -44,7 +44,6 @@ public class TrelloClientTest {
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
         //Given
-
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_board", "test_id", new ArrayList<>());
         URI uri = new URI("http://test.com/members/jareksoja/boards?key=test&token=test&fields=name,id&lists=all");
@@ -52,11 +51,9 @@ public class TrelloClientTest {
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
         //When
-
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
 
         //Then
-
         assertEquals(1, fetchedTrelloBoards.size());
         assertEquals("test_id", fetchedTrelloBoards.get(0).getId());
         assertEquals("test_board", fetchedTrelloBoards.get(0).getName());
@@ -66,7 +63,6 @@ public class TrelloClientTest {
     @Test
     public void shouldCreateCard() throws URISyntaxException {
         //Given
-
         TrelloCardDto trelloCardDto = new TrelloCardDto("Test task", "top", "Test Description", "test_id");
 
         URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20Description&pos=top&idList=test_id");
@@ -79,11 +75,9 @@ public class TrelloClientTest {
         when(restTemplate.postForObject(uri, null, CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
 
         //When
-
         CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
         //Then
-
         assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
     }
@@ -91,16 +85,12 @@ public class TrelloClientTest {
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
-
         URI uri = new URI("http://test.com/members/jareksoja/boards?key=test&token=test&fields=name,id&lists=all");
-        //when(restTemplate.getForObject(uri, TrelloBoardDto.class)).thenReturn(null);
 
         //When
-
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
 
         //Then
-
         assertEquals(0, fetchedTrelloBoards.size());
     }
 }
