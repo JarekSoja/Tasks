@@ -15,8 +15,7 @@ public class TaskDto {
     @JsonProperty("content")
     private String content;
 
-    public TaskDto(Long id, String title, String content) {
-        this.id = id;
+    public TaskDto(String title, String content) {
         this.title = title;
         this.content = content;
     }

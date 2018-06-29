@@ -2,6 +2,7 @@ package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.*;
+import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,17 +31,23 @@ public class TrelloServiceTest {
     @Mock
     AdminConfig adminConfig;
 
+    @Mock
+    TrelloMapper trelloMapper;
+
     @Test
     public void shouldCreateNewCard() {
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("name1", "pos1", "desc1", "id1");
+        TrelloCard trelloCard = new TrelloCard("name1", "pos1", "desc1", "id1");
         CreatedTrelloCardDto mappedTrelloCardDto = new CreatedTrelloCardDto("id2", "name2", "shortUrl");
-        Mail mail = new Mail("test", "test", "test", "test");
 
         when(trelloClient.createNewCard(trelloCardDto)).thenReturn(mappedTrelloCardDto);
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+
 
         //When
-       CreatedTrelloCardDto testedCard = trelloService.createTrelloCard(trelloCardDto);
+       CreatedTrelloCardDto testedCard = trelloService.createTrelloCard(trelloMapper.mapToCard(trelloCardDto));
 
        //Then
         Assert.assertEquals("id2", testedCard.getId());

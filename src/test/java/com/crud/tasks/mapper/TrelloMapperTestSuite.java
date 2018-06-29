@@ -121,7 +121,7 @@ public class TrelloMapperTestSuite {
         String testDesc = card.getDescription();
         //Then
         Assert.assertEquals("test1", testName);
-        Assert.assertEquals("teeest", testDesc);
+        Assert.assertEquals("2", testDesc);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class TrelloMapperTestSuite {
         String testDesc = cardDto.getDescription();
         //Then
         Assert.assertEquals("test66", testName);
-        Assert.assertEquals("teeest", testDesc);
+        Assert.assertEquals("332", testDesc);
     }
 
 
